@@ -36,7 +36,7 @@ export default function RootLayout({
         <body className={inter.className}>
         <div className='flex h-[100vh]'>
             {/* aside section  */}
-            <aside className="lg:h-full  lg:w-[25%] hidden  lg:flex flex-col bg-primary p-8 items-center ">
+            <aside className="lg:h-full  lg:w-[24%] hidden  lg:flex flex-col bg-primary p-8 items-center ">
                 <Link href={'/'}>
                     <Image
                         className="flex w-[30%] sm:w-[40%] m-auto flex-shrink-0"
@@ -56,21 +56,21 @@ export default function RootLayout({
                                 alt={"sendbox-logo"}
                                 src={"/images/svg/overview.svg"}
                             />
-                            <Link href='/starships' className='text-white font-medium text-sm'>Overview</Link>
+                            <Link href='/home' className='text-white text-lg font-medium'>Overview</Link>
                         </li>
                     </ul>
                     <ul className='list-none space-y-2'>
-                        <li className='flex space-x-2'>
+                        <li className='flex space-x-2 items-center text-lg'>
                             <div className='rounded-lg bg-blueBright w-5 h-5'></div>
-                            <Link href='/starships' className='text-white font-medium text-sm'>Starships</Link>
+                            <Link href='/starships' className='text-white font-medium '>Starships</Link>
                         </li>
-                        <li className='flex space-x-2'>
+                        <li className='flex space-x-2 items-center text-lg'>
                             <div className='rounded-lg bg-pinkie w-5 h-5'></div>
-                            <Link href='/people' className='text-white font-medium text-sm'>People</Link>
+                            <Link href='/people' className='text-white font-medium '>People</Link>
                         </li>
-                        <li className='flex space-x-2'>
+                        <li className='flex space-x-2 items-center text-lg'>
                             <div className='rounded-lg bg-yellowBright w-5 h-5'></div>
-                            <Link href='/species' className='text-white font-medium text-sm'>Species</Link>
+                            <Link href='/species' className='text-white font-medium '>Species</Link>
                         </li>
                     </ul>
 
@@ -79,10 +79,10 @@ export default function RootLayout({
             {/* main section  */}
             <main className="flex flex-1 flex-col ">
                 {/* header*/}
-                <div className='hidden sm:flex  sm:p-4 shadow'>
+                <div className='hidden sm:flex  sm:p-4 shadow mb-8'>
                     <div className='flex-1'></div>
-                    <div className='space-x-2'>
-                        <div className='flex divide-x'>
+                    <div className='space-x-4'>
+                        <div className='flex space-x-4 divide-x'>
                             <Image
                                 className="flex w-5 h-5 m-auto flex-shrink-0"
                                 width={20}
@@ -92,7 +92,7 @@ export default function RootLayout({
                             />
                             <div className='space-x-4 flex'>
                                 <Image
-                                    className="flex w-5 h-5 m-auto flex-shrink-0"
+                                    className="flex w-5 h-5 ml-4 m-auto flex-shrink-0"
                                     width={20}
                                     height={20}
                                     alt={"profile"}
