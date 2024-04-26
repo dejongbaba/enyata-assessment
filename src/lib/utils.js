@@ -1,7 +1,7 @@
 import moment from "moment";
 import {v4 as uuidv4} from "uuid";
 import _ from "lodash";
-import countries from "@/lib/countries";
+import countries from "./countries";
 
 export const toBase64 = (file) =>
     new Promise((resolve, reject) => {

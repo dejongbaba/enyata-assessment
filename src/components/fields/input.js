@@ -1,6 +1,5 @@
 import {ErrorMessage, Field} from "formik";
 import {classNames} from "@/lib/utils";
-import {useEffect} from "react";
 
 export default function Component({
                                       name,
@@ -26,9 +25,10 @@ export default function Component({
                 const formatValue = (val) => (format ? format(val) : val);
                 // const handleChange = onChange(name);
                 // const handleBlur = onBlur(name);
-                useEffect(() => {
-                    onInputChanged && onInputChanged(value);
-                }, [value]);
+                // Todo uncomment if needed
+                // useEffect(() => {
+                //     onInputChanged && onInputChanged(value);
+                // }, [value]);
 
                 return (
                     <fieldset className="relative">

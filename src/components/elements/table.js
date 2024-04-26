@@ -1,3 +1,4 @@
+"use client"
 import {Fragment, useEffect, useMemo, useRef, useState} from "react";
 import {classNames} from "@/lib/utils";
 import {useTable} from "react-table";
@@ -123,9 +124,9 @@ export default function Component({
             <table className="w-full" {...getTableProps()}>
                 {showHeader && (
                     <thead className="bg-white text-slate-400">
-                    {headerGroups.map((headerGroup) => {
+                    {headerGroups.map((headerGroup, i) => {
                         return (
-                            <tr {...headerGroup.getHeaderGroupProps()}>
+                            <tr {...headerGroup.getHeaderGroupProps()} key={i}>
                                 {showCheckbox && (
                                     <th scope="col" className="relative w-12 px-4 sm:w-16">
                                         <input
@@ -168,14 +169,14 @@ export default function Component({
                     {...getTableBodyProps()}>
                 {
                     // Loop over the table rows
-                    rows.map((row) => {
+                    rows.map((row, i) => {
                         // Prepare the row for display
                         prepareRow(row);
                         const {original} = row;
 
                         return (
                             // Apply the row props
-                            <tr
+                            <tr key={i}
                                 onClick={(e) => {
                                     onRowClick && onRowClick(original);
                                     e.stopPropagation();

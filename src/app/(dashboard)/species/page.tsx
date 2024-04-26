@@ -1,3 +1,4 @@
+'use client'
 import {Table} from '@/components/elements'
 
 export default function Page() {
@@ -107,24 +108,6 @@ export default function Page() {
                                 ""
                             }`}
                         </span>
-                    </div>
-                );
-            },
-        },
-        {
-            id: "is_active",
-            Header: "Active",
-            accessor: "is_active",
-            className: "text-right",
-            headerClassName: "w-28 text-right",
-            Cell: ({value, row: {original}}) => {
-                return (
-                    <div className="flex flex-col space-y-1">
-                        {original?.is_active ? (
-                            <StatusLabel name="active" code="active"/>
-                        ) : (
-                            <StatusLabel name="inactive" code="inactive"/>
-                        )}
                     </div>
                 );
             },

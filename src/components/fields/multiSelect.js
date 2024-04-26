@@ -35,6 +35,7 @@ export default function Component({
 
     useEffect(() => {
         value && onItemSelected && onItemSelected(getSelectedOption());
+        //    react-hooks/exhaustive-deps
     }, [value]);
 
     const formatValue = (option) => (format ? format(option) : option[optionLabel]);

@@ -4,7 +4,7 @@ import React, {useRef} from "react";
 import {Formik} from "formik";
 import * as Yup from "yup";
 import {Button, Input} from "@/components/fields";
-import {useRouter, useSearchParams} from "next/navigation";
+import {useRouter} from "next/navigation";
 
 interface IInitialValues {
     email: string,
@@ -13,11 +13,9 @@ interface IInitialValues {
 
 export default function Component() {
     const formRef = useRef<IInitialValues>();
-    const searchParams = useSearchParams();
-    const redirectTo = searchParams.get("redirectTo") || "/";
+    const redirectTo = "/";
 
     const router = useRouter();
-    const altURL = `/signup?redirectTo=${redirectTo}`;
 
     const initialValues = {
         email: "",

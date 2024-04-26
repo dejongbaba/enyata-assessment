@@ -1,23 +1,24 @@
-import { Fragment, useState, useEffect } from "react";
-import { Menu, Transition } from "@headlessui/react";
-import { classNames } from "app/lib/utils";
-import { ChevronDownIcon } from "@heroicons/react/24/outline";
+"use client"
+import {Fragment, useEffect, useState} from "react";
+import {Menu, Transition} from "@headlessui/react";
+import {classNames} from "@/lib/utils";
+import {ChevronDownIcon} from "@heroicons/react/24/outline";
 
 export default function Component({
-    items = [],
-    anchor = "left",
-    labelProp = "name",
-    valueProp = "code",
-    value = "",
-    extraClasses = "",
-    extraMenuClasses = "",
-    extraItemClasses = "",
-    showCaret = true,
-    format,
-    caret,
-    formatLabel,
-    onItemSelected,
-}) {
+                                      items = [],
+                                      anchor = "left",
+                                      labelProp = "name",
+                                      valueProp = "code",
+                                      value = "",
+                                      extraClasses = "",
+                                      extraMenuClasses = "",
+                                      extraItemClasses = "",
+                                      showCaret = true,
+                                      format,
+                                      caret,
+                                      formatLabel,
+                                      onItemSelected,
+                                  }) {
     console.log("currency items", items);
     const [selectedItem, setSelectedItem] = useState({});
     const _formatLabel = (item) => {
@@ -48,7 +49,7 @@ export default function Component({
                     (caret ? (
                         <>{caret}</>
                     ) : (
-                        <ChevronDownIcon strokeWidth={2.5} className="mt-0.5 h-4 w-4" aria-hidden="true" />
+                        <ChevronDownIcon strokeWidth={2.5} className="mt-0.5 h-4 w-4" aria-hidden="true"/>
                     ))}
             </Menu.Button>
 
@@ -71,7 +72,7 @@ export default function Component({
                             items.map((item, idx) => {
                                 return (
                                     <Menu.Item key={idx}>
-                                        {({ active }) => (
+                                        {({active}) => (
                                             <a
                                                 onClick={() => {
                                                     setSelectedItem(item);

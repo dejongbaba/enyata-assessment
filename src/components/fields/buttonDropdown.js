@@ -53,7 +53,7 @@ export default function ButtonDropDown({
                                             items?.map((i) => {
                                                 const {label, func} = i;
                                                 return (
-                                                    <Menu.Item>
+                                                    <Menu.Item key={i}>
                                                         {({active}) => (
                                                             <button
                                                                 onClick={() => func()}
