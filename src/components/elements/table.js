@@ -101,6 +101,7 @@ export default function Component({
         setIndeterminate(isIndeterminate);
         if (checkbox?.current) checkbox.current.indeterminate = isIndeterminate;
         onSelectionChanged && onSelectionChanged(selected);
+        //     react-hooks/exhaustive-deps
     }, [selected]);
 
     const toggleAll = () => {
@@ -123,7 +124,7 @@ export default function Component({
             {/*)}*/}
             <table className="w-full" {...getTableProps()}>
                 {showHeader && (
-                    <thead className="bg-white text-slate-400">
+                    <thead className="bg-white border-2 border-slate-100 rounded-md text-slate-400">
                     {headerGroups.map((headerGroup, i) => {
                         return (
                             <tr {...headerGroup.getHeaderGroupProps()} key={i}>
@@ -165,7 +166,7 @@ export default function Component({
                     </thead>
                 )}
                 <tbody
-                    className="divide-y-2 border-t-2 border-slate-50 divide-slate-50 bg-white font-medium md:text-sm"
+                    className="divide-y-2 border-2 border-slate-100 divide-slate-100 bg-white font-medium md:text-sm"
                     {...getTableBodyProps()}>
                 {
                     // Loop over the table rows

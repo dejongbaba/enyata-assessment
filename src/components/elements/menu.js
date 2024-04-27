@@ -34,6 +34,7 @@ export default function Component({
     useEffect(() => {
         const initialItem = _.find(items, (item) => item[valueProp] === value);
         setSelectedItem(initialItem);
+        //     react-hooks/exhaustive-deps
     }, [value]);
 
     return (

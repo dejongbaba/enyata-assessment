@@ -2,11 +2,11 @@ import {api} from "@/services/index";
 
 export default class SpeciesService {
     static async getSpecies() {
-        return api.get('/species/')
+        return api.get('/photos/')
     }
 
     static async getOneSpecie(id) {
-        return api.get(`/species/${id}`)
+        return api.get(`/photos/${id}`)
     }
 
 }
