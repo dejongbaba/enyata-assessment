@@ -31,7 +31,7 @@ export default function RootLayout({
         <body className={inter.className}>
         <div className='flex lg:h-[100vh]'>
             {/* aside section  */}
-            <aside className="lg:h-full sm:fixed sm:w-[22%] hidden  lg:flex flex-col flex-start bg-primary  ">
+            <aside className="lg:h-full z-10 sm:fixed sm:w-[22%] hidden  lg:flex flex-col flex-start bg-primary  ">
                 <Link href={'/'}>
                     <Image
                         className="flex w-[30%] sm:w-[40%] my-8 m-auto flex-shrink-0"
@@ -133,7 +133,7 @@ export default function RootLayout({
 
 
                 </div>
-                <div className='px-8'>
+                <div className='p-4 sm:p-8 mb-8'>
 
                     {children}
                 </div>

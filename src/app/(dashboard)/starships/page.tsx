@@ -127,7 +127,9 @@ export default function Page() {
         return <Loader/>
     }
     return (
-        <div>
+        <div className='space-y-4'>
+            <h1 className={'text-slate-400 font-semibold text-2xl '}>Starships</h1>
+
             <Table columnDefs={columnDefs} onRowClick={onRowClick} objects={starships || []}/>
         </div>
     );

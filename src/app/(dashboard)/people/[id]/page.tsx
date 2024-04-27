@@ -3,7 +3,7 @@ import Image from "next/image";
 import {useEffect, useState} from "react";
 import {useParams} from "next/navigation";
 import PeopleService from "@/services/people";
-import {Loader} from "next/dist/shared/lib/app-dynamic";
+import {Loader} from "@/components/elements";
 import ImageService from "@/services/images";
 
 export default function Page() {
@@ -18,6 +18,7 @@ export default function Page() {
     const getSinglePerson = async () => {
         try {
             const [specie, image] = await Promise.all([PeopleService.getOnePerson(id), ImageService.getOne((Math.random() * 50) + 1)]);
+            console.log('person', specie, image)
             setPerson(specie?.data)
             setImage(image?.data?.url)
             setLoading(false)
@@ -49,7 +50,7 @@ export default function Page() {
             </div>
             <div className='space-y-4 px-2 sm:px-6'>
 
-                <h1 className='font-bold text-4xl '>{person.name}</h1>
+                <h1 className='font-bold text-4xl '>{person?.name || ''}</h1>
                 <div className='space-y-1'>
                     <p><span>Designation:</span> <span>Sentient</span></p>
                     <p><span>Eye Colors: </span> <span>Blue, Green, Yellow</span></p>

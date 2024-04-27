@@ -36,9 +36,6 @@ export default function Page() {
                 return (
                     <div className="flex flex-col space-y-1 uppercase">
                         <span className="">{original?.username}</span>
-                        {/*<span className="text-xs capitalize tracking-normal font-normal text-slate-400">*/}
-                        {/*    {original?.provider?.toUpperCase()}*/}
-                        {/*</span>*/}
                     </div>
                 );
             },
@@ -54,10 +51,10 @@ export default function Page() {
 
                         <span className="text-xs capitalize tracking-normal font-normal text-slate-400">
 
-                            {`${
+                            {
                                 (original?.phone ||
                                     "")
-                            }`}
+                            }
                         </span>
                     </div>
                 );
@@ -71,9 +68,6 @@ export default function Page() {
             Cell: ({value, row: {original}}) => {
                 return (
                     <div className="flex flex-col space-y-1 uppercase">
-                        <span className="">
-
-                        </span>
                         <span className="text-xs capitalize tracking-normal font-normal text-slate-400">
                             {
                                 (original?.company?.name) ||
@@ -88,7 +82,6 @@ export default function Page() {
             id: "payments",
             Header: "Producer ",
             accessor: "payments",
-            // className: "w-1/4",
             Cell: ({value, row: {original}}) => {
                 return (
                     <div className="flex flex-col space-y-1 uppercase">
@@ -96,11 +89,10 @@ export default function Page() {
 
                         </span>
                         <span className="text-xs capitalize tracking-normal font-normal text-slate-400">
-                            {/*{original?.region}*/}
-                            {`${
+                            {
                                 (original?.address?.city) ||
                                 ""
-                            }`}
+                            }
                         </span>
                     </div>
                 );
@@ -131,24 +123,14 @@ export default function Page() {
                     </div>
                 );
             },
-        }, {
-            Header: "Created",
-            accessor: "created",
-            className: "w-28 text-right",
-            headerClassName: "w-28 text-right",
-            Cell: ({row: {original}}) => {
-                return (
-                    <div>
-                        {original?.website || ''}
-                    </div>
-                );
-            },
         },
     ];
 
     return (
-        <div>
-            <Table columnDefs={columnDefs} onRowClick={onRowClick} data={people}/>
+        <div className='space-y-4'>
+            <h1 className={'text-slate-400 font-semibold text-2xl '}>People</h1>
+
+            <Table columnDefs={columnDefs} onRowClick={onRowClick} objects={people}/>
         </div>
     );
 }
