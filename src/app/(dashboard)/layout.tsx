@@ -3,7 +3,7 @@ import {Inter} from "next/font/google";
 import "../globals.css";
 import Image from "next/image";
 import Link from "next/link";
-import {useRouter} from "next/navigation";
+import {usePathname} from "next/navigation";
 
 const inter = Inter({subsets: ["latin"]});
 
@@ -14,7 +14,8 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
 
-    const router = useRouter();
+    const pathname = usePathname();
+
 
     const menus = [
         {title: 'Overview', href: "/home"},
@@ -22,6 +23,7 @@ export default function RootLayout({
         {title: 'Species', href: "/species"},
         {title: 'Starships', href: "/starships"}
     ]
+
 
     return (
         <html lang="en">
@@ -44,13 +46,13 @@ export default function RootLayout({
                         {
                             menus?.length && menus.slice(0, 1).map((m, i) => {
                                 const isActive =
-                                    (router.pathname?.includes(m.href) && m.href !== "/") ||
-                                    router.pathname === m.href;
+                                    (pathname?.includes(m.href) && m.href !== "/") ||
+                                    pathname === m.href;
 
                                 if (i == 0) {
                                     return (
                                         <ul className='list-none'>
-                                            <li className={`flex space-x-4 items-center ${isActive ? 'bg-secondary' : ''}  hover:bg-secondary rounded-lg transition px-4 py-2`}>
+                                            <li className={`flex space-x-4 items-center text-white hover:text-primary ${isActive ? 'bg-secondary' : ''}  hover:bg-blue-200 rounded-lg transition px-4 py-2`}>
                                                 <Image
                                                     className="flex w-5 h-5  flex-shrink-0"
                                                     width={30}
@@ -59,7 +61,7 @@ export default function RootLayout({
                                                     src={"/images/svg/overview.svg"}
                                                 />
                                                 <Link href={m.href}
-                                                      className={`text-white text-lg font-medium`}>{m.title}</Link>
+                                                      className={` text-lg font-medium`}>{m.title}</Link>
                                             </li>
                                         </ul>)
                                 }
@@ -74,32 +76,21 @@ export default function RootLayout({
                                     const colors = ['bg-pinkie', 'bg-blueBright', 'bg-yellowBright'];
 
                                     const isActive =
-                                        (router.pathname?.includes(m.href) && m.href !== "/") ||
-                                        router.pathname === m.href;
+                                        (pathname?.includes(m.href) && m.href !== "/") ||
+                                        pathname === m.href;
 
                                     return (
                                         <li key={i}
-                                            className={`${isActive ? 'bg-secondary' : ''} flex space-x-4 items-center text-lg hover:bg-secondary rounded-lg transition px-4 py-2`}>
+                                            className={`${isActive ? 'bg-secondary' : ''} flex space-x-4 text-white hover:text-primary items-center text-lg hover:bg-blue-200  rounded-lg transition px-4 py-2`}>
                                             <div className={`rounded-lg ${colors[i]} w-5 h-5`}></div>
-                                            <Link href={m.href} className='text-white font-medium '>{m.title}</Link>
+                                            <Link href={m.href}
+                                                  className=' font-medium '>{m.title}</Link>
                                         </li>)
 
                                 })
                             }
                         </ul>
 
-                        {/*<li className='flex space-x-4 items-center text-lg hover:bg-secondary rounded-lg transition px-4 py-2'>*/}
-                        {/*    <div className='rounded-lg bg-blueBright w-5 h-5'></div>*/}
-                        {/*    <Link href='/starships' className='text-white font-medium '>Starships</Link>*/}
-                        {/*</li>*/}
-                        {/*<li className='flex space-x-4 items-center text-lg hover:bg-secondary rounded-lg transition px-4 py-2'>*/}
-                        {/*    <div className='rounded-lg bg-pinkie w-5 h-5'></div>*/}
-                        {/*    <Link href='/people' className='text-white font-medium '>People</Link>*/}
-                        {/*</li>*/}
-                        {/*<li className='flex space-x-4 items-center text-lg hover:bg-secondary rounded-lg transition px-4 py-2'>*/}
-                        {/*    <div className='rounded-lg bg-yellowBright w-5 h-5'></div>*/}
-                        {/*    <Link href='/species' className='text-white font-medium '>Species</Link>*/}
-                        {/*</li>*/}
 
                     </div>
                 </div>

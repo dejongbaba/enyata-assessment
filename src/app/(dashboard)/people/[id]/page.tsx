@@ -1,25 +1,38 @@
 'use client'
 import Image from "next/image";
 import {useEffect, useState} from "react";
-import {useRouter} from "next/navigation";
+import {useParams} from "next/navigation";
 import PeopleService from "@/services/people";
 import {Loader} from "next/dist/shared/lib/app-dynamic";
+import ImageService from "@/services/images";
 
 export default function Page() {
 
-    const router = useRouter();
-    const id = router.query.id;
-    const [person, setPerson] = useState();
-    const [loading, setLoading] = useState(true);
-    useEffect(() => {
-        PeopleService.getOnePerson(id).then((res) => {
-            setPerson(res)
-            setLoading(false)
-        }).catch((e) => {
-            console.log('unable to get person', e)
-        })
-    }, [id])
+    const param = useParams();
+    const id = param.id;
 
+    const [person, setPerson] = useState();
+    const [image, setImage] = useState();
+    const [loading, setLoading] = useState(true);
+
+    const getSinglePerson = async () => {
+        try {
+            const [specie, image] = await Promise.all([PeopleService.getOnePerson(id), ImageService.getOne((Math.random() * 50) + 1)]);
+            setPerson(specie?.data)
+            setImage(image?.data?.url)
+            setLoading(false)
+        } catch (e) {
+            console.log('unable to get person', e)
+
+        }
+    }
+    useEffect(() => {
+
+        getSinglePerson()
+
+
+    }, [id])
+    console.log('person', person)
     if (loading) {
         return <Loader/>
     }
@@ -30,8 +43,8 @@ export default function Page() {
                     className="flex w-full m-auto flex-shrink-0"
                     width={120}
                     height={20}
-                    alt={"sendbox-logo"}
-                    src={person.image}
+                    alt={"person"}
+                    src={image}
                 />
             </div>
             <div className='space-y-4 px-2 sm:px-6'>

@@ -10,6 +10,7 @@ export default function Page() {
     const router = useRouter();
     useEffect(() => {
         PeopleService.getPeople().then((res) => {
+            console.log('people', res.data)
             setPeople(res?.data)
             setLoading(false)
         }).catch((e) => {
@@ -28,38 +29,34 @@ export default function Page() {
     const columnDefs = [
         {
             id: "name",
-            Header: "Courier",
+            Header: "Name",
             accessor: "name",
             // className: "w-1/4",
             Cell: ({value, row: {original}}) => {
                 return (
                     <div className="flex flex-col space-y-1 uppercase">
-                        <span className="">{`${[original?.name].join(" \u2010 ")}`}</span>
-                        <span className="text-xs capitalize tracking-normal font-normal text-slate-400">
-                            {original?.provider?.toUpperCase()}
-                        </span>
+                        <span className="">{original?.username}</span>
+                        {/*<span className="text-xs capitalize tracking-normal font-normal text-slate-400">*/}
+                        {/*    {original?.provider?.toUpperCase()}*/}
+                        {/*</span>*/}
                     </div>
                 );
             },
         },
         {
             id: "services",
-            Header: "Service type",
+            Header: "Birth Year",
             accessor: "services",
             // className: "w-1/4",
             Cell: ({value, row: {original}}) => {
                 return (
                     <div className="flex flex-col space-y-1 uppercase">
-                        {/*<span className="">*/}
-                        {/*    {`${[...original?.service_types?.map((s) => s.name)].join(" \u2022 ")}`}*/}
-                        {/*</span>*/}
+
                         <span className="text-xs capitalize tracking-normal font-normal text-slate-400">
-                            {/*{original?.region}*/}
-                            {/*{`${[...original?.service_types?.map((s) => s.name)].join(" \u2022 ")}`}*/}
+
                             {`${
-                                (original?.service_types?.length &&
-                                    original?.service_types?.map((s) => s.name).join(" \u2022 ")) ||
-                                ""
+                                (original?.phone ||
+                                    "")
                             }`}
                         </span>
                     </div>
@@ -68,25 +65,20 @@ export default function Page() {
         },
         {
             id: "packages",
-            Header: "Package type",
+            Header: "Gender",
             accessor: "packages",
             // className: "w-1/4",
             Cell: ({value, row: {original}}) => {
                 return (
                     <div className="flex flex-col space-y-1 uppercase">
                         <span className="">
-                            {/*    {`${[...original?.package_types?.map((s) => s.name)].join(*/}
-                            {/*    " \u2022 "*/}
-                            {/*)}`}*/}
+
                         </span>
                         <span className="text-xs capitalize tracking-normal font-normal text-slate-400">
-                            {/*{original?.region}*/}
-                            {`${
-                                (original?.package_types?.length &&
-                                    original?.package_types?.map((s) => s.name).join(" \u2022 ")) ||
+                            {
+                                (original?.company?.name) ||
                                 ""
-                            }`}
-                            {/*{`${[...original?.package_types?.map((s) => s.name)].join(" \u2022 ")}`}*/}
+                            }
                         </span>
                     </div>
                 );
@@ -94,7 +86,7 @@ export default function Page() {
         },
         {
             id: "payments",
-            Header: "Payment type",
+            Header: "Producer ",
             accessor: "payments",
             // className: "w-1/4",
             Cell: ({value, row: {original}}) => {
@@ -106,8 +98,7 @@ export default function Page() {
                         <span className="text-xs capitalize tracking-normal font-normal text-slate-400">
                             {/*{original?.region}*/}
                             {`${
-                                (original?.payment_types?.length &&
-                                    original?.payment_types?.map((s) => s.name).join(" \u2022 ")) ||
+                                (original?.address?.city) ||
                                 ""
                             }`}
                         </span>
@@ -116,42 +107,48 @@ export default function Page() {
             },
         },
         {
-            Header: "",
+            Header: "Hair color ",
             accessor: "view",
             className: "w-28 text-right",
             headerClassName: "w-28 text-right",
             Cell: ({row: {original}}) => {
                 return (
-                    <button
-                        type="button"
-                        // onClick={() => onRowClick(original)}
-                        className="text-gray-900 text-xs font-bold uppercase tracking-wider hover:text-primary-300">
-                        view
-                    </button>
+                    <div>
+                        {original?.address?.suite || ''}
+                    </div>
                 );
             },
         },
         {
-            Header: "",
+            Header: "Height",
             accessor: "activate",
             className: "w-28 text-right",
             headerClassName: "w-28 text-right",
             Cell: ({row: {original}}) => {
                 return (
-                    <button
-                        type="button"
-                        onClick={() => {
-                        }}
-                        className="text-primary text-xs font-bold uppercase tracking-wider hover:text-primary-300">
-                        {original?.is_active ? "Deactivate" : "Activate"}
-                    </button>
+                    <div>
+                        {original?.website || ''}
+                    </div>
+                );
+            },
+        }, {
+            Header: "Created",
+            accessor: "created",
+            className: "w-28 text-right",
+            headerClassName: "w-28 text-right",
+            Cell: ({row: {original}}) => {
+                return (
+                    <div>
+                        {original?.website || ''}
+                    </div>
                 );
             },
         },
     ];
+
     return (
         <div>
-            <Table columnDefs={columnDefs} onRowClick={onRowClick} data={people || []}/>
+            <Table columnDefs={columnDefs} onRowClick={onRowClick} data={people}/>
         </div>
     );
 }

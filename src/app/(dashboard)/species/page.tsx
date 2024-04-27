@@ -8,7 +8,6 @@ export default function Page() {
 
 
     const columnDefs = [
-
         {
             id: "name",
             Header: "Name",
@@ -17,7 +16,10 @@ export default function Page() {
             Cell: ({value, row: {original}}) => {
                 return (
                     <div className="flex flex-col space-y-1 uppercase">
-                        <span className="">{original?.name}</span>
+                        <span className="">{original?.username}</span>
+                        {/*<span className="text-xs capitalize tracking-normal font-normal text-slate-400">*/}
+                        {/*    {original?.provider?.toUpperCase()}*/}
+                        {/*</span>*/}
                     </div>
                 );
             },
@@ -30,16 +32,12 @@ export default function Page() {
             Cell: ({value, row: {original}}) => {
                 return (
                     <div className="flex flex-col space-y-1 uppercase">
-                        {/*<span className="">*/}
-                        {/*    {`${[...original?.service_types?.map((s) => s.name)].join(" \u2022 ")}`}*/}
-                        {/*</span>*/}
+
                         <span className="text-xs capitalize tracking-normal font-normal text-slate-400">
-                            {/*{original?.region}*/}
-                            {/*{`${[...original?.service_types?.map((s) => s.name)].join(" \u2022 ")}`}*/}
+
                             {`${
-                                (original?.service_types?.length &&
-                                    original?.service_types?.map((s) => s.name).join(" \u2022 ")) ||
-                                ""
+                                (original?.phone ||
+                                    "")
                             }`}
                         </span>
                     </div>
@@ -48,25 +46,20 @@ export default function Page() {
         },
         {
             id: "packages",
-            Header: "Package type",
+            Header: "Eye Colors",
             accessor: "packages",
             // className: "w-1/4",
             Cell: ({value, row: {original}}) => {
                 return (
                     <div className="flex flex-col space-y-1 uppercase">
                         <span className="">
-                            {/*    {`${[...original?.package_types?.map((s) => s.name)].join(*/}
-                            {/*    " \u2022 "*/}
-                            {/*)}`}*/}
+
                         </span>
                         <span className="text-xs capitalize tracking-normal font-normal text-slate-400">
-                            {/*{original?.region}*/}
-                            {`${
-                                (original?.package_types?.length &&
-                                    original?.package_types?.map((s) => s.name).join(" \u2022 ")) ||
+                            {
+                                (original?.company?.name) ||
                                 ""
-                            }`}
-                            {/*{`${[...original?.package_types?.map((s) => s.name)].join(" \u2022 ")}`}*/}
+                            }
                         </span>
                     </div>
                 );
@@ -74,44 +67,49 @@ export default function Page() {
         },
         {
             id: "payments",
-            Header: "Eye Color",
+            Header: "Hair Color ",
             accessor: "payments",
             // className: "w-1/4",
             Cell: ({value, row: {original}}) => {
                 return (
-                    original?.url
+                    <div className="flex flex-col space-y-1 uppercase">
+                        <span className="">
+
+                        </span>
+                        <span className="text-xs capitalize tracking-normal font-normal text-slate-400">
+                            {/*{original?.region}*/}
+                            {`${
+                                (original?.address?.city) ||
+                                ""
+                            }`}
+                        </span>
+                    </div>
                 );
             },
         },
         {
-            Header: "Ear Color",
+            Header: "Height ",
             accessor: "view",
             className: "w-28 text-right",
             headerClassName: "w-28 text-right",
             Cell: ({row: {original}}) => {
                 return (
-                    original?.url
+                    <div>
+                        {original?.address?.suite || ''}
+                    </div>
                 );
             },
         },
         {
-            Header: "Height",
+            Header: "Created",
             accessor: "activate",
             className: "w-28 text-right",
             headerClassName: "w-28 text-right",
             Cell: ({row: {original}}) => {
                 return (
-                    original?.url
-                );
-            },
-        }, {
-            Header: "Created",
-            accessor: "created",
-            className: "w-28 text-right",
-            headerClassName: "w-28 text-right",
-            Cell: ({row: {original}}) => {
-                return (
-                    original?.url
+                    <div>
+                        {original?.website || ''}
+                    </div>
                 );
             },
         },
