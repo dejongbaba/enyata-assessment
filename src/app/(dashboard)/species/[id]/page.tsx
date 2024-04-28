@@ -17,7 +17,7 @@ export default function Page() {
 
     const getSingleSpecie = async () => {
         try {
-            const [specie, image] = await Promise.all([SpeciesService.getOneSpecie(id), ImageService.getOne((Math.random() * 50) + 1)]);
+            const [specie, image] = await Promise.all([SpeciesService.getOneSpecie(id), ImageService.getOne(parseInt(Math.random() * 50) + 1)]);
             setSpecie(specie?.data)
             setImage(image?.data?.url)
             setLoading(false)
@@ -50,15 +50,13 @@ export default function Page() {
                         src={image}
                     />
                 </div>
-                <div className='space-y-4 px-2 sm:px-6'>
-
-                    <h1 className='font-bold text-4xl '>{specie?.name}</h1>
+                <div className='space-y-4 sm:px-6'>
+                    <h1 className='font-bold text-4xl '>{specie?.name || ''}</h1>
                     <div className='space-y-1'>
-                        <p><span>Designation:</span> <span>Sentient</span></p>
-                        <p><span>Eye Colors: </span> <span>Blue, Green, Yellow</span></p>
-                        <p><span>Average Lifespan:  </span> <span>400</span></p>
+                        <p><span>Designation:</span> <span>{specie?.company?.bs || ''}</span></p>
+                        <p><span>Eye Colors: </span> <span>{specie?.website || ""}</span></p>
+                        <p><span>Average Lifespan:  </span> <span>{specie?.address?.zipcode || ''}</span></p>
                     </div>
-
                 </div>
             </div>
 
