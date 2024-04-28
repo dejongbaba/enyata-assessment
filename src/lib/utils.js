@@ -140,52 +140,6 @@ export const normalizedInventories = (products) => {
     );
 };
 
-export const normalizedSubCategories = (items) => {
-    return items.length ? items?.map((i) => ({label: `${i.category.name} / ${i.name}`, ...i})) : [];
-};
-
-export const filterProductsByCurrency = (currency, products) => {
-    if (products?.length) {
-        return products.filter((i) => {
-            return i?.prices?.length ? i?.prices?.find((i) => i?.currency?.code === currency) : i;
-        });
-    }
-    return products;
-};
-export const normalizeWarehouses = (warehouses) => {
-    console.log("warehouses", warehouses);
-    return (
-        (warehouses?.length &&
-            warehouses?.map((w) => {
-                const {name, pk, ...others} = w.address;
-                return {...w, ...others, country: w.address?.country};
-            })) ||
-        []
-    );
-};
-export const isAnswerFilled = (item) => {
-    return item?.description_map?.every((i) => i.value) || false;
-};
-export const orderItemStatus = (code) => {
-    const status = {
-        due_for_transfer: "out of stock",
-        delivered: "delivered",
-        ready_for_processing: "in stock",
-        delivery_in_progress: "delivery in progress",
-    };
-    return status[code] || "";
-};
-export const extractDescription = (item, itemType) => {
-    const {description_map = [], description} = item;
-    console.log("description item", description_map, description, item);
-    const extractedKey = extractKey(description_map);
-    extractedKey["item-type"] = itemType?.replace("_", " ")?.replace("-", " ")?.toLowerCase();
-    const replacedTemplate = description?.replace(/\[(.*?)\]/g, (x) => {
-        const key = x.replace(/\[|\]/g, "");
-        return extractedKey[key];
-    });
-    return replacedTemplate || "";
-};
 
 export const extractKey = (item) => {
     const result = {};
@@ -196,67 +150,11 @@ export const extractKey = (item) => {
     return result;
 };
 
-export function toTitleCase(str) {
-    return str?.replace(/\w\S*/g, function (txt) {
-        return txt?.charAt(0).toUpperCase() + txt?.substr(1)?.toLowerCase();
-    });
-}
-
-export const checkValidItem = (items) => {
-    if (items?.length) {
-        return items.every((i) => {
-            return i.quantity && i.value && i.item_type;
-        });
-    }
-    return false;
-};
-export const isCategorized = (items) => {
-    if (items?.length) {
-        console.log(
-            "items length",
-            items?.filter((i) => i.product_id && i.category && i.sub_category)
-        );
-        const categorized = items
-            ?.filter((i) => !(i.product_id && i.category && i.sub_category))
-            .every((i) => {
-                return i.product_id && i.category && i.sub_category;
-            });
-        console.log("categorized", categorized);
-        return categorized;
-    }
-    return false;
-};
-
-export const truncateString = (str, n) => {
-    if (str?.length > n) {
-        return str?.substring(0, n) + "...";
-    } else {
-        return str;
-    }
-};
 
 export function formatDate(dateString, format = "MMM DD, YYYY") {
     return moment(dateString).format(format);
 }
 
-export function openInTab(href, newTab) {
-    var a = document.createElement("a");
-    a.href = href;
-    if (newTab) {
-        a.setAttribute("target", "_blank");
-    }
-    a.click();
-}
-
-export const getCurrency = (currency) => {
-    if (currency === "NG") {
-        return "₦";
-    }
-    if (currency === "GH") {
-        return "gh₵";
-    }
-    return "";
-};
 
 export function debounceFunc(func, timeout = 300) {
     let timer;
@@ -280,54 +178,6 @@ export const dimensions = (obj) => {
         dims += `${obj.dimension?.length}CM`;
     }
     return dims;
-};
-
-export const buildFetchFilterParams = (filterBy, options) => {
-    console.log("filterBy in fetch", filterBy);
-    let acc = {};
-    const prepareChoice = (value, option) => {
-        switch (option.type) {
-            case "dateRange":
-                const val = value?.split("__");
-                const [min, max, choice] = val;
-                const [day, month, year] = min?.split("-");
-                const [maxDay, maxMonth, maxYear] = max?.split("-");
-                return {value: {min: new Date(year, month, day), max: new Date(maxYear, maxMonth, maxDay)}, choice};
-            case "numberRage":
-                const nums = value?.split("__");
-                const [first, last, c] = nums;
-                //    find the value
-                return {value: {min: Number(first), max: Number(last)}, choice: c};
-
-            case "date":
-                const dateVal = value?.split("__");
-                const [dateTime, choiceVal] = dateVal;
-                const [dateDay, dateMonth, dateYear] = dateTime?.split("-");
-                return {value: new Date(dateYear, dateMonth, dateDay), choice: choiceVal};
-            case "number":
-            case "options":
-            case "dropdown":
-            case "boolean":
-            case "text":
-                return {value: value === "true" ? true : value === "false" ? false : value, choice: value};
-            default:
-                return {
-                    value: value === "true" ? true : value === "false" ? false : value,
-                    choice: value,
-                };
-        }
-    };
-    _.forEach(filterBy, (f, key) => {
-        const option = _.find(options, (o) => {
-            return o.code === key;
-        });
-        const {prop, op} = option;
-        const {value} = prepareChoice(f[op?.replace("$", "")], option);
-
-        acc = {...acc, [`${prop}`]: {op, value}};
-    });
-
-    return acc;
 };
 
 export function serializeFilters(values = {}) {

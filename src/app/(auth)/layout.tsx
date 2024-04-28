@@ -33,7 +33,7 @@ export default function RootLayout({
                 </Link>
             </aside>
             {/* main section  */}
-            <main className="flex flex-1  m-auto">{children}</main>
+            <main className="flex flex-1  sm:m-auto">{children}</main>
         </div>
         </body>
         </html>

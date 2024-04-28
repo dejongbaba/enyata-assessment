@@ -145,7 +145,7 @@ export default function Page() {
 
     return (
         <div className=''>
-            <div className='flex space-x-8 mb-8 '>
+            <div className='flex flex-col sm:flex-row  space-y-2 sm:space-x-8 mb-8 '>
                 {overview?.length && overview?.map((o, i) => {
                     const titles = ['People', 'Starship', 'Species'];
                     const colors = ['bg-pinkie', 'bg-blueBright', 'bg-yellowBright'];
