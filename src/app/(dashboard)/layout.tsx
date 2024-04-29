@@ -1,5 +1,5 @@
 'use client'
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {usePathname} from "next/navigation";
@@ -88,10 +88,19 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
 
+    const pathname = usePathname();
+
     const [open, setOpen] = useState(false);
     const openNavigator = () => {
         setOpen(!open);
     }
+    const closeNavigator = () => {
+        setOpen(false);
+    }
+
+    useEffect(() => {
+        closeNavigator()
+    }, [pathname])
 
     return (
 
@@ -108,7 +117,7 @@ export default function RootLayout({
                 {/* header*/}
                 <div className='flex space-between sm:space-around px-2 py-4 sm:p-4 shadow mb-8'>
                     <div className='hidden sm:flex flex-1'></div>
-                    <div className='space-x-4'>
+                    <div className='space-x-4 flex-1 sm:flex-initial'>
                         <div className='flex space-x-4 divide-x'>
                             <Image
                                 className="flex w-5 h-5 m-auto flex-shrink-0"
@@ -117,7 +126,7 @@ export default function RootLayout({
                                 alt={"notification"}
                                 src={"/images/svg/notification.svg"}
                             />
-                            <div className='space-x-4 flex'>
+                            <div className='space-x-4 flex flex-1 items-between sm:items-around'>
                                 <Image
                                     className="flex w-5 h-5 ml-4 m-auto flex-shrink-0"
                                     width={20}
@@ -129,7 +138,7 @@ export default function RootLayout({
                                     John Doe
                                 </div>
                                 <Image
-                                    className="flex w-5 h-5 m-auto flex-shrink-0"
+                                    className="flex w-5 h-5 hidden sm:flex m-auto flex-shrink-0"
                                     width={20}
                                     height={20}
                                     alt={"menu"}

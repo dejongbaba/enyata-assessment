@@ -151,7 +151,7 @@ export default function Page() {
                     const colors = ['bg-pinkie', 'bg-blueBright', 'bg-yellowBright'];
                     const random = (Math.random() + 1) * 6 + 5;
                     console.log('o', o)
-                    return <div key={i} className="card p-4 h-[150px] space-y-6 w-[25%] shadow-lg rounded-lg ">
+                    return <div key={i} className="card p-4 h-[150px] space-y-6 sm:w-[25%] shadow-lg rounded-lg ">
                         <div className='flex justify-between'>
                             <h2 className='font-bold text-2xl '>{titles[i]}</h2>
                             <div className={`w-8 h-8  rounded-lg  ${colors[i]}`}></div>

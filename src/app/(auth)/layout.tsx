@@ -1,10 +1,8 @@
 import type {Metadata} from "next";
-import {Inter} from "next/font/google";
 import "../globals.css";
 import Link from "next/link";
 import Image from "next/image";
 
-const inter = Inter({subsets: ["latin"]});
 
 export const metadata: Metadata = {
     title: "Create Next App",
@@ -17,8 +15,7 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en">
-        <body className={inter.className}>
+
         <div className='flex h-[100vh]'>
             {/* aside section  */}
             <aside className="lg:h-full  lg:w-[40%] hidden  lg:flex bg-primary justify-center items-center ">
@@ -35,7 +32,5 @@ export default function RootLayout({
             {/* main section  */}
             <main className="flex flex-1  sm:m-auto">{children}</main>
         </div>
-        </body>
-        </html>
     );
 }

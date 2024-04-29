@@ -115,7 +115,7 @@ export default function Component({
     if (objects?.length === 0) return <EmptyComponent/>;
 
     return (
-        <div className="w-full overflow-x-scroll">
+        <div className="w-[300px] sm:w-full overflow-x-scroll">
             {/* Bulk actions box might be implemented differently */}
             {/*{selected && selected.length > 0 && (*/}
             {/*    <div className="absolute bg-white w-full py-3.5 pl-12 sm:pl-20">*/}
